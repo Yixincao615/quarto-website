@@ -1,0 +1,23 @@
+---
+title: "Yixin Cao"
+image: "files/profile_pic.jpg"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:yixincao615@gmail.com
+    - icon: linkedin
+      href: www.linkedin.com/in/yixin-cao-874bb3294
+---
+
+Welcome to my website!
+---
+
+## About Me
+I am Yixin Cao, a Business Analytics student at the University of California, San Diego (UCSD). I am interested in data analysis and problem solving, and I enjoy using quantitative methods to turn raw data into meaningful business insights.
+
+## Skills & Experience
+I have experience working with Python, SQL, Excel, and data visualization tools. My academic projects include exploratory data analysis, predictive modeling, and real-world business applications.
+
+## Interests
+I am particularly interested in customer analytics, forecasting, and data-driven decision making.

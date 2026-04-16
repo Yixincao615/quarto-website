@@ -1,0 +1,13 @@
+---
+title: "Yixin Cao"
+image: "files/profile_pic.jpg"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:.com
+    - icon: linkedin
+      href: www.linkedin.com/in/yixin-cao-874bb3294
+---
+
+Welcome to my website!

@@ -1,0 +1,29 @@
+---
+title: "Yixin Cao"
+image: "files/profile_pic.jpg"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:yixincao615@gmail.com
+    - icon: linkedin
+      href: www.linkedin.com/in/yixin-cao-874bb3294
+---
+
+Welcome to my website!
+
+I am Yixin Cao, a student interested in business analytics, data analysis, and problem solving with data. I enjoy using quantitative methods to turn raw data into useful business insights.
+
+My academic interests include customer analytics, forecasting, machine learning, and data visualization. I am especially interested in applying analytics to real business problems and making data-driven decisions.
+
+## Skills
+- Python
+- SQL
+- Excel
+- Tableau / Power BI
+- Data cleaning
+- Statistical analysis
+- Machine learning
+
+## Current Focus
+I am currently working on projects involving exploratory data analysis, modeling, and business problem solving. This website highlights my background, resume, and selected projects.
