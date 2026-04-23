@@ -1,0 +1,19 @@
+---
+title: "Replication of Angrist and Lavy (1999)"
+subtitle: "Using Maimonides’ Rule to Estimate the Effect of Class Size"
+author: "Your Name"
+date: Apr 22, 2026
+---
+
+
+## Introduction
+
+add
+
+## Main Analysis
+
+add
+
+## Something Additional
+
+add

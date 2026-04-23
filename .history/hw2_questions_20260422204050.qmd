@@ -1,0 +1,77 @@
+---
+title: "Replication of Angrist and Lavy (1999)"
+subtitle: "Using Maimonides’ Rule to Estimate the Effect of Class Size"
+author: "Your Name"
+date: Apr 22, 2026
+---
+
+
+## Introduction
+
+This project replicates a key finding from Angrist and Lavy (1999), which studies the causal effect of class size on student achievement.
+
+The authors exploit a natural rule known as **Maimonides’ rule**, which caps class size at 40 students. When enrollment exceeds 40, classes are split, creating a discontinuity in class size. This generates quasi-random variation in class size, allowing for a causal interpretation using a regression discontinuity design (RDD).
+
+The main research question is whether smaller class sizes improve student test scores.
+
+
+## Main Analysis
+
+```{python}
+import pandas as pd
+import numpy as np
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+
+df = pd.read_stata("data/final4.dta")
+
+print("Shape before filters:", df.shape)
+print(df.columns.tolist())
+df.head()
+```
+Prepare the Sample
+
+The replication do files apply sample restrictions before estimation. I follow the same logic here by keeping reasonable class sizes, positive enrollment, the relevant school type, and nonmissing reading scores. The do file also indicates that tipuach is the disadvantage control and that predicted class size is constructed from c_size. This matches the paper’s discussion of a school-level percent disadvantaged control and enrollment-based rule variable.
+```{python}
+df = df.copy()
+
+# sample restrictions based on the replication do file
+df = df[(df["classize"] > 1) & (df["classize"] < 45) & (df["c_size"] > 5)]
+df = df[(df["c_leom"] == 1) & (df["c_pik"] < 3)]
+df = df[df["avgverb"].notna()].copy()
+
+print("Shape after filters:", df.shape)
+df[["avgverb", "classize", "c_size", "cohsize", "tipuach"]].head()
+```
+Variable Mapping
+
+The paper’s fourth-grade variables map to this dataset as follows:
+
+avgverb = average verbal/reading score
+classize = actual class size
+c_size = enrollment used for the rule construction
+tipuach = disadvantage control
+cohsize = cohort size variable available in the file, but the replication code uses c_size for the rule-based construction
+
+The paper defines the main variables as average verbal score, class size, enrollment, and percent disadvantaged.
+
+Construct Maimonides' Rule
+
+The paper defines predicted class size as:
+
+$$
+f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
+$$
+	​
+This is the nonlinear rule that creates the discontinuities used for identification.
+```{python}
+df["func1"] = df["c_size"] / (np.floor((df["c_size"] - 1) / 40) + 1)
+df["c_size2"] = (df["c_size"] ** 2) / 100
+
+df[["c_size", "classize", "func1", "tipuach", "avgverb"]].head()
+```
+
+
+## Something Additional
+
+add

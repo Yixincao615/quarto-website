@@ -14,10 +14,10 @@ website:
         text: Projects
       - text: Blog
         menu:
-          - href: hw1_questions.qmd
-            text: HW1
-          - href: hw2_questions.qmd
-            text: HW2
+        - href: hw1_questions.qmd
+        text: HW1
+        - href: hw2_questions.qmd
+        text: HW2
 
 format:
   html:

@@ -1,0 +1,130 @@
+---
+title: "Replication of Angrist and Lavy (1999)"
+subtitle: "Using Maimonides’ Rule to Estimate the Effect of Class Size"
+author: "Your Name"
+date: Apr 22, 2026
+---
+
+
+## Introduction
+
+This project replicates a key finding from Angrist and Lavy (1999), which studies the causal effect of class size on student achievement.
+
+The authors exploit a natural rule known as **Maimonides’ rule**, which caps class size at 40 students. When enrollment exceeds 40, classes are split, creating a discontinuity in class size. This generates quasi-random variation in class size, allowing for a causal interpretation using a regression discontinuity design (RDD).
+
+The main research question is whether smaller class sizes improve student test scores.
+
+
+## Main Analysis
+
+```{python}
+import pandas as pd
+import numpy as np
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+
+df = pd.read_stata("data/final4.dta")
+
+print("Shape before filters:", df.shape)
+print(df.columns.tolist())
+df.head()
+```
+Prepare the Sample
+
+The replication do files apply sample restrictions before estimation. I follow the same logic here by keeping reasonable class sizes, positive enrollment, the relevant school type, and nonmissing reading scores. The do file also indicates that tipuach is the disadvantage control and that predicted class size is constructed from c_size. This matches the paper’s discussion of a school-level percent disadvantaged control and enrollment-based rule variable.
+```{python}
+df = df.copy()
+
+# sample restrictions based on the replication do file
+df = df[(df["classize"] > 1) & (df["classize"] < 45) & (df["c_size"] > 5)]
+df = df[(df["c_leom"] == 1) & (df["c_pik"] < 3)]
+df = df[df["avgverb"].notna()].copy()
+
+print("Shape after filters:", df.shape)
+df[["avgverb", "classize", "c_size", "cohsize", "tipuach"]].head()
+```
+Variable Mapping
+
+The paper’s fourth-grade variables map to this dataset as follows:
+
+avgverb = average verbal/reading score
+classize = actual class size
+c_size = enrollment used for the rule construction
+tipuach = disadvantage control
+cohsize = cohort size variable available in the file, but the replication code uses c_size for the rule-based construction
+
+The paper defines the main variables as average verbal score, class size, enrollment, and percent disadvantaged.
+
+Construct Maimonides' Rule
+
+The paper defines predicted class size as:
+
+$$
+f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
+$$
+	​
+This is the nonlinear rule that creates the discontinuities used for identification.
+```{python}
+df["func1"] = df["c_size"] / (np.floor((df["c_size"] - 1) / 40) + 1)
+df["c_size2"] = (df["c_size"] ** 2) / 100
+
+df[["c_size", "classize", "func1", "tipuach", "avgverb"]].head()
+```
+
+Part 1: Replicate Figure 1 Panel B (4th Grade)
+
+Figure 1 panel b in the paper plots average class size against initial enrollment for fourth grade, together with the class-size function predicted by Maimonides’ rule. The key visual fact is that actual class size rises with enrollment but drops at thresholds such as 40, 80, and 120, mirroring the rule.
+```{python}
+plot_df = (
+    df.groupby("c_size", as_index=False)[["classize", "func1"]]
+      .mean()
+      .sort_values("c_size")
+)
+
+plt.figure(figsize=(10, 6))
+plt.plot(plot_df["c_size"], plot_df["classize"], label="Actual average class size")
+plt.plot(plot_df["c_size"], plot_df["func1"], linestyle="--", label="Predicted by Maimonides' rule")
+
+for cutoff in [40, 80, 120]:
+    plt.axvline(cutoff, color="gray", linestyle=":", linewidth=1)
+
+plt.xlabel("Enrollment")
+plt.ylabel("Class size")
+plt.title("Replication of Figure 1 Panel B: Fourth Grade")
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+Figure Explanation
+
+This graph recreates the main visual intuition of the paper. As enrollment increases, actual class size generally rises, but at the thresholds implied by Maimonides’ rule, average class size drops. The dotted rule-based line shows the theoretical pattern, and the solid line shows that actual class size broadly follows it. That is the basis for the identification strategy.
+
+Part 2: Replicate the Naive OLS Baseline (Table II Logic)
+
+The paper’s Table II reports OLS estimates for fourth-grade reading and math scores as a function of class size, percent disadvantaged, and enrollment. It shows that once disadvantage is controlled for, the raw positive correlation between class size and scores largely disappears and may become negative.
+
+Below I estimate the fourth-grade reading specification in the same spirit.
+
+OLS with Class Size and Disadvantage
+```{python}
+ols_1 = smf.ols(
+    "avgverb ~ classize + tipuach",
+    data=df
+).fit(cov_type="HC1")
+
+print(ols_1.summary())
+```
+
+OLS with Class Size, Disadvantage, and Enrollment
+ols_2 = smf.ols(
+    "avgverb ~ classize + tipuach + c_size",
+    data=df
+).fit(cov_type="HC1")
+
+print(ols_2.summary())
+```
+
+## Something Additional
+
+add

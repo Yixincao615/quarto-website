@@ -1,0 +1,30 @@
+---
+title: "Replication of Angrist and Lavy (1999)"
+subtitle: "Using Maimonides’ Rule to Estimate the Effect of Class Size"
+author: "Your Name"
+date: Apr 22, 2026
+---
+
+
+## Introduction
+
+This project replicates a key finding from Angrist and Lavy (1999), which studies the causal effect of class size on student achievement.
+
+The authors exploit a natural rule known as **Maimonides’ rule**, which caps class size at 40 students. When enrollment exceeds 40, classes are split, creating a discontinuity in class size. This generates quasi-random variation in class size, allowing for a causal interpretation using a regression discontinuity design (RDD).
+
+The main research question is whether smaller class sizes improve student test scores.
+
+
+## Main Analysis
+
+```{python}
+import pandas as pd
+
+df = pd.read_stata("/Users/sunnycao/Desktop/quarto_website/data/final4.dta")
+df.head()
+```
+
+
+## Something Additional
+
+add
