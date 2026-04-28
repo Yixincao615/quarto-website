@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.13">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,9 +11,6 @@
 
 <title>Replication of Angrist and Lavy (1999) – Yixin Cao’s website</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ac077c1e730dfeb5e42400639d17284e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8fedf4b0b09d7e3efc607d46e5f6a2f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -259,7 +257,7 @@ window.Quarto = {
 </section>
 <section id="main-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="main-analysis">Main Analysis</h2>
-<div id="6cec6359" class="cell" data-execution_count="1">
+<div id="de7bc1c3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -436,7 +434,7 @@ window.Quarto = {
 <section id="prepare-the-sample" class="level4">
 <h4 class="anchored" data-anchor-id="prepare-the-sample">Prepare the Sample</h4>
 <p>The replication do files apply sample restrictions before estimation. I follow the same logic here by keeping reasonable class sizes, positive enrollment, the relevant school type, and nonmissing reading scores. The do file also indicates that tipuach is the disadvantage control and that predicted class size is constructed from c_size. This matches the paper’s discussion of a school-level percent disadvantaged control and enrollment-based rule variable.</p>
-<div id="8e693300" class="cell" data-execution_count="2">
+<div id="5f41e93b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.copy()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sample restrictions based on the replication do file</span></span>
@@ -528,7 +526,7 @@ window.Quarto = {
 <p><span class="math display">\[
 f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 \]</span> ​ This is the nonlinear rule that creates the discontinuities used for identification.</p>
-<div id="6f75f7c3" class="cell" data-execution_count="3">
+<div id="0f228b3e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"func1"</span>] <span class="op">=</span> df[<span class="st">"c_size"</span>] <span class="op">/</span> (np.floor((df[<span class="st">"c_size"</span>] <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">40</span>) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c_size2"</span>] <span class="op">=</span> (df[<span class="st">"c_size"</span>] <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,7 +597,7 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 <section id="part-1-replicate-figure-1-panel-b-4th-grade" class="level3">
 <h3 class="anchored" data-anchor-id="part-1-replicate-figure-1-panel-b-4th-grade">Part 1: Replicate Figure 1 Panel B (4th Grade)</h3>
 <p>Figure 1 panel b in the paper plots average class size against initial enrollment for fourth grade, together with the class-size function predicted by Maimonides’ rule. The key visual fact is that actual class size rises with enrollment but drops at thresholds such as 40, 80, and 120, mirroring the rule.</p>
-<div id="e78876d0" class="cell" data-execution_count="4">
+<div id="b1c211a8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plot_df <span class="op">=</span> (</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"c_size"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"classize"</span>, <span class="st">"func1"</span>]]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      .mean()</span>
@@ -622,7 +620,7 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hw2_questions_files/figure-html/cell-5-output-1.png" width="950" height="566" class="figure-img"></p>
+<p><img src="hw2_questions_files/figure-html/cell-5-output-1.png" width="949" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -637,7 +635,7 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 <p>Below I estimate the fourth-grade reading specification in the same spirit.</p>
 <section id="ols-with-class-size-and-disadvantage" class="level4">
 <h4 class="anchored" data-anchor-id="ols-with-class-size-and-disadvantage">OLS with Class Size and Disadvantage</h4>
-<div id="09b90352" class="cell" data-execution_count="5">
+<div id="0f6c41af" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ols_1 <span class="op">=</span> smf.ols(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ classize + tipuach"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -650,8 +648,8 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 Dep. Variable:                avgverb   R-squared:                       0.309
 Model:                            OLS   Adj. R-squared:                  0.309
 Method:                 Least Squares   F-statistic:                     321.0
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):          5.59e-122
-Time:                        21:02:45   Log-Likelihood:                -6786.5
+Date:                Tue, 28 Apr 2026   Prob (F-statistic):          5.59e-122
+Time:                        12:14:00   Log-Likelihood:                -6786.5
 No. Observations:                2049   AIC:                         1.358e+04
 Df Residuals:                    2046   BIC:                         1.360e+04
 Df Model:                           2                                         
@@ -676,7 +674,7 @@ Notes:
 </section>
 <section id="ols-with-class-size-disadvantage-and-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="ols-with-class-size-disadvantage-and-enrollment">OLS with Class Size, Disadvantage, and Enrollment</h4>
-<div id="74555584" class="cell" data-execution_count="6">
+<div id="4c54dc96" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ols_2 <span class="op">=</span> smf.ols(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ classize + tipuach + c_size"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -689,8 +687,8 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.309
 Model:                            OLS   Adj. R-squared:                  0.308
 Method:                 Least Squares   F-statistic:                     214.2
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):          7.71e-121
-Time:                        21:02:45   Log-Likelihood:                -6786.2
+Date:                Tue, 28 Apr 2026   Prob (F-statistic):          7.71e-121
+Time:                        12:14:00   Log-Likelihood:                -6786.2
 No. Observations:                2049   AIC:                         1.358e+04
 Df Residuals:                    2045   BIC:                         1.360e+04
 Df Model:                           3                                         
@@ -728,7 +726,7 @@ Notes:
 <p>The paper’s Table III regresses class size and test scores on predicted class size from Maimonides’ rule, with controls for percent disadvantaged and enrollment. For fourth-grade reading, the paper reports a negative reduced-form relationship between the rule-based predictor and reading scores.</p>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage">Reduced Form: Reading on Predicted Class Size + Disadvantage</h4>
-<div id="12d9314c" class="cell" data-execution_count="7">
+<div id="0564b4e9" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rf_1 <span class="op">=</span> smf.ols(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach"</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -741,8 +739,8 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.311
 Model:                            OLS   Adj. R-squared:                  0.311
 Method:                 Least Squares   F-statistic:                     326.5
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):          8.88e-124
-Time:                        21:02:45   Log-Likelihood:                -6783.4
+Date:                Tue, 28 Apr 2026   Prob (F-statistic):          8.88e-124
+Time:                        12:14:00   Log-Likelihood:                -6783.4
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2046   BIC:                         1.359e+04
 Df Model:                           2                                         
@@ -767,7 +765,7 @@ Notes:
 </section>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment">Reduced Form: Reading on Predicted Class Size + Disadvantage + Enrollment</h4>
-<div id="87a3c26f" class="cell" data-execution_count="8">
+<div id="fa914953" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rf_2 <span class="op">=</span> smf.ols(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach + c_size"</span>,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -780,8 +778,8 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.311
 Model:                            OLS   Adj. R-squared:                  0.310
 Method:                 Least Squares   F-statistic:                     217.6
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):          1.70e-122
-Time:                        21:02:45   Log-Likelihood:                -6783.4
+Date:                Tue, 28 Apr 2026   Prob (F-statistic):          1.70e-122
+Time:                        12:14:00   Log-Likelihood:                -6783.4
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2045   BIC:                         1.360e+04
 Df Model:                           3                                         
@@ -807,7 +805,7 @@ Notes:
 </section>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment-quadratic-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment-quadratic-enrollment">Reduced Form: Reading on Predicted Class Size + Disadvantage + Enrollment + Quadratic Enrollment</h4>
-<div id="afcc23e8" class="cell" data-execution_count="9">
+<div id="8e0d8e31" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rf_3 <span class="op">=</span> smf.ols(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach + c_size + c_size2"</span>,</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -820,8 +818,8 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.314
 Model:                            OLS   Adj. R-squared:                  0.312
 Method:                 Least Squares   F-statistic:                     165.3
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):          9.50e-123
-Time:                        21:02:45   Log-Likelihood:                -6779.9
+Date:                Tue, 28 Apr 2026   Prob (F-statistic):          9.50e-123
+Time:                        12:14:00   Log-Likelihood:                -6779.9
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2044   BIC:                         1.360e+04
 Df Model:                           4                                         
@@ -848,7 +846,7 @@ Notes:
 </section>
 <section id="compare-ols-and-reduced-form" class="level4">
 <h4 class="anchored" data-anchor-id="compare-ols-and-reduced-form">Compare OLS and Reduced Form</h4>
-<div id="1f497330" class="cell" data-execution_count="10">
+<div id="7f707dee" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"OLS: class size + disadvantage"</span>,</span>
@@ -942,7 +940,7 @@ Notes:
 <p>This is the additional requirement beyond replication.</p>
 <p>The reason Angrist and Lavy can make a causal claim is that Maimonides’ rule induces a known nonlinear and nonmonotonic relationship between enrollment and class size. Enrollment itself may still be related to test scores, but the key idea is that most non-class-size effects of enrollment should vary smoothly, while class size changes sharply at the thresholds. If test scores move in a way that mirrors those same discontinuities, the most plausible explanation is that class size is causing the change. The paper explicitly presents this as an application of Campbell’s regression-discontinuity design.</p>
 <p>To make that intuition visible, I plot average reading scores by enrollment.</p>
-<div id="06dce307" class="cell" data-execution_count="11">
+<div id="97809971" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>score_df <span class="op">=</span> (</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"c_size"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"avgverb"</span>, <span class="st">"func1"</span>]]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      .mean()</span>
@@ -961,7 +959,7 @@ Notes:
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hw2_questions_files/figure-html/cell-12-output-1.png" width="950" height="566" class="figure-img"></p>
+<p><img src="hw2_questions_files/figure-html/cell-12-output-1.png" width="949" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
