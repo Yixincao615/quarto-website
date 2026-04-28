@@ -82,8 +82,7 @@ The plot shows that when the number of observations is small, the estimate is ve
 
 As more data is included, the estimate becomes smoother and stabilizes. Eventually, it converges toward the true value of 0.04.
 
-This demonstrates the Law of Large Numbers: with a larger sample size, our estimate becomes more reliable and closer to the true difference.
-
+This demonstrates the Law of Large Numbers: with a larger sample size, our estimate becomes more reliable and closer to the true difference. This also shows that results from small samples can be quite unstable.
 
 ## Bootstrap Standard Errors
 
