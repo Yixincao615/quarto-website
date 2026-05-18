@@ -260,7 +260,7 @@ window.Quarto = {
 <section id="exploring-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
 <p>The dataset was first imported and inspected to understand the structure of the variables. The outcome variable is the number of patents awarded over the previous five years, which is a non-negative count variable.</p>
-<div id="6856f0ff" class="cell" data-message="false" data-execution_count="1">
+<div id="0cc5cf77" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
@@ -318,7 +318,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The summary statistics below provide an overview of the variables included in the dataset.</p>
-<div id="32a7c3b8" class="cell" data-execution_count="2">
+<div id="36f925eb" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -390,7 +390,7 @@ window.Quarto = {
 <p>The dataset contains 1,500 engineering firms and includes four main variables: the number of patents awarded over the last five years, firm region, firm age, and whether the firm is a Blueprinty customer.</p>
 <p>The average number of patents is approximately 3.68, while the average firm age is about 26 years. Roughly 32% of firms in the sample are Blueprinty customers.</p>
 <p>I first compared the distribution of patent counts between Blueprinty customers and non-customers. The histograms below use the same x-axis scale so that the two groups can be compared directly.</p>
-<div id="8a2279dd" class="cell" data-message="false" data-execution_count="3">
+<div id="d42cac43" class="cell" data-message="false" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -431,7 +431,7 @@ window.Quarto = {
 <p>However, both distributions are right-skewed, meaning most firms have relatively low patent counts while a smaller number of firms produce many patents. This skewness suggests that ordinary linear regression may not be appropriate because the dependent variable is a count variable with a non-normal distribution.</p>
 <p>The mean patent count for Blueprinty customers is higher than for non-customers, but this raw difference alone does not prove that the software causes greater patent success.</p>
 <p>Next, I compared the regional distribution of customers and non-customers. This matters because firms in different regions may face different innovation environments.</p>
-<div id="e9804662" class="cell" data-message="false" data-execution_count="4">
+<div id="88f46d1e" class="cell" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -443,7 +443,7 @@ window.Quarto = {
 <p>The regional distribution differs substantially between Blueprinty customers and non-customers. Blueprinty customers are concentrated more heavily in the Northeast region, while non-customers are distributed more evenly across regions.</p>
 <p>This difference matters because innovation activity and patent production may vary by region. Firms operating in technology-intensive regions may naturally produce more patents regardless of software usage. Therefore, region should be included as a control variable in the regression model.</p>
 <p>I also compared firm age by customer status.</p>
-<div id="259537af" class="cell" data-message="false" data-execution_count="5">
+<div id="cdc7cb1a" class="cell" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -481,7 +481,7 @@ L(\lambda|Y) = \prod_{i=1}^{n} \frac{e^{-\lambda}\lambda^{Y_i}}{Y_i!}
 \right)
 \]</span></p>
 <p>The log-likelihood was coded as a function of the parameter <span class="math inline">\(\lambda\)</span> and the observed patent counts.</p>
-<div id="4218a347" class="cell" data-message="false" data-execution_count="6">
+<div id="ca47da14" class="cell" data-message="false" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -500,7 +500,7 @@ L(\lambda|Y) = \prod_{i=1}^{n} \frac{e^{-\lambda}\lambda^{Y_i}}{Y_i!}
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>loglik</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, I plotted the log-likelihood across a range of possible <span class="math inline">\(\lambda\)</span> values to visually identify the maximum likelihood estimate.</p>
-<div id="8e8357db" class="cell" data-message="false" data-execution_count="7">
+<div id="18f25866" class="cell" data-message="false" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -516,7 +516,7 @@ L(\lambda|Y) = \prod_{i=1}^{n} \frac{e^{-\lambda}\lambda^{Y_i}}{Y_i!}
 \]</span></p>
 <p>This result makes intuitive sense because the Poisson distribution uses a single parameter <span class="math inline">\(\lambda\)</span> to represent both the mean and the variance of the distribution.</p>
 <p>I then estimated the Maximum Likelihood Estimate numerically using scipy.optimize.</p>
-<div id="d3dbb37f" class="cell" data-message="false" data-execution_count="8">
+<div id="5b566769" class="cell" data-message="false" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    poisson_loglikelihood,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    x0<span class="op">=</span>[<span class="dv">1</span>],</span>
@@ -551,7 +551,7 @@ Y_i \sim \text{Poisson}(\lambda_i)
 <p>The covariate matrix (X) includes: - an intercept, - firm age, - firm age squared, - regional indicator variables, - and a binary variable indicating whether the firm is a Blueprinty customer.</p>
 <p>Age squared was included because the relationship between firm age and innovation output is unlikely to be perfectly linear. One regional category was omitted to avoid perfect multicollinearity with the intercept term.</p>
 <p>I first updated the Poisson log-likelihood function so that it depends on the covariate matrix (X) and parameter vector ().</p>
-<div id="83e781ef" class="cell" data-message="false" data-execution_count="9">
+<div id="c1687480" class="cell" data-message="false" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -593,7 +593,7 @@ Y_i \sim \text{Poisson}(\lambda_i)
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>loglik</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, I estimated the parameter vector numerically using Maximum Likelihood Estimation and computed standard errors using the inverse Hessian matrix.</p>
-<div id="72874e9a" class="cell" data-message="false" data-execution_count="10">
+<div id="abc7d64a" class="cell" data-message="false" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial guesses</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>beta0 <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -685,7 +685,7 @@ Y_i \sim \text{Poisson}(\lambda_i)
 </div>
 </div>
 <p>To validate the numerical optimization results, I estimated the same model using Python’s built-in Poisson Generalized Linear Model implementation.</p>
-<div id="9accdadf" class="cell" data-message="false" data-execution_count="11">
+<div id="22faa605" class="cell" data-message="false" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>poisson_model <span class="op">=</span> sm.GLM(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Y,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    X,</span>
@@ -813,7 +813,7 @@ Y_i \sim \text{Poisson}(\lambda_i)
 \frac{1}{n}\sum_{i=1}^{n}(\hat{y}_{1i} - \hat{y}_{0i})
 \]</span></p>
 <p>This value estimates the average effect of Blueprinty’s software on patent counts while holding each firm’s age and region fixed at their observed values.</p>
-<div id="6677acff" class="cell" data-execution_count="12">
+<div id="8e4e5a87" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create counterfactual datasets</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X0 <span class="op">=</span> X.copy()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> X.copy()</span>
