@@ -184,6 +184,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./hw2_questions.html">
  <span class="dropdown-text">HW2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./hw3_questions.html">
+ <span class="dropdown-text">HW3</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -257,7 +261,11 @@ window.Quarto = {
 </section>
 <section id="main-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="main-analysis">Main Analysis</h2>
+<<<<<<< HEAD
 <div id="de7bc1c3" class="cell" data-execution_count="1">
+=======
+<div id="704a8f94" class="cell" data-execution_count="1">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -434,7 +442,11 @@ window.Quarto = {
 <section id="prepare-the-sample" class="level4">
 <h4 class="anchored" data-anchor-id="prepare-the-sample">Prepare the Sample</h4>
 <p>The replication do files apply sample restrictions before estimation. I follow the same logic here by keeping reasonable class sizes, positive enrollment, the relevant school type, and nonmissing reading scores. The do file also indicates that tipuach is the disadvantage control and that predicted class size is constructed from c_size. This matches the paper’s discussion of a school-level percent disadvantaged control and enrollment-based rule variable.</p>
+<<<<<<< HEAD
 <div id="5f41e93b" class="cell" data-execution_count="2">
+=======
+<div id="26f4f38b" class="cell" data-execution_count="2">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.copy()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sample restrictions based on the replication do file</span></span>
@@ -526,7 +538,11 @@ window.Quarto = {
 <p><span class="math display">\[
 f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 \]</span> ​ This is the nonlinear rule that creates the discontinuities used for identification.</p>
+<<<<<<< HEAD
 <div id="0f228b3e" class="cell" data-execution_count="3">
+=======
+<div id="3546cd2c" class="cell" data-execution_count="3">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"func1"</span>] <span class="op">=</span> df[<span class="st">"c_size"</span>] <span class="op">/</span> (np.floor((df[<span class="st">"c_size"</span>] <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">40</span>) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"c_size2"</span>] <span class="op">=</span> (df[<span class="st">"c_size"</span>] <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -597,7 +613,11 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 <section id="part-1-replicate-figure-1-panel-b-4th-grade" class="level3">
 <h3 class="anchored" data-anchor-id="part-1-replicate-figure-1-panel-b-4th-grade">Part 1: Replicate Figure 1 Panel B (4th Grade)</h3>
 <p>Figure 1 panel b in the paper plots average class size against initial enrollment for fourth grade, together with the class-size function predicted by Maimonides’ rule. The key visual fact is that actual class size rises with enrollment but drops at thresholds such as 40, 80, and 120, mirroring the rule.</p>
+<<<<<<< HEAD
 <div id="b1c211a8" class="cell" data-execution_count="4">
+=======
+<div id="ebcde86a" class="cell" data-execution_count="4">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plot_df <span class="op">=</span> (</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"c_size"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"classize"</span>, <span class="st">"func1"</span>]]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      .mean()</span>
@@ -635,7 +655,11 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 <p>Below I estimate the fourth-grade reading specification in the same spirit.</p>
 <section id="ols-with-class-size-and-disadvantage" class="level4">
 <h4 class="anchored" data-anchor-id="ols-with-class-size-and-disadvantage">OLS with Class Size and Disadvantage</h4>
+<<<<<<< HEAD
 <div id="0f6c41af" class="cell" data-execution_count="5">
+=======
+<div id="624145d7" class="cell" data-execution_count="5">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ols_1 <span class="op">=</span> smf.ols(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ classize + tipuach"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -648,8 +672,13 @@ f_s = \frac{\text{enrollment}}{\lfloor (enrollment - 1)/40 \rfloor + 1}
 Dep. Variable:                avgverb   R-squared:                       0.309
 Model:                            OLS   Adj. R-squared:                  0.309
 Method:                 Least Squares   F-statistic:                     321.0
+<<<<<<< HEAD
 Date:                Tue, 28 Apr 2026   Prob (F-statistic):          5.59e-122
 Time:                        12:14:00   Log-Likelihood:                -6786.5
+=======
+Date:                Sun, 17 May 2026   Prob (F-statistic):          5.59e-122
+Time:                        21:14:42   Log-Likelihood:                -6786.5
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 No. Observations:                2049   AIC:                         1.358e+04
 Df Residuals:                    2046   BIC:                         1.360e+04
 Df Model:                           2                                         
@@ -674,7 +703,11 @@ Notes:
 </section>
 <section id="ols-with-class-size-disadvantage-and-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="ols-with-class-size-disadvantage-and-enrollment">OLS with Class Size, Disadvantage, and Enrollment</h4>
+<<<<<<< HEAD
 <div id="4c54dc96" class="cell" data-execution_count="6">
+=======
+<div id="c16aa143" class="cell" data-execution_count="6">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ols_2 <span class="op">=</span> smf.ols(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ classize + tipuach + c_size"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -687,8 +720,13 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.309
 Model:                            OLS   Adj. R-squared:                  0.308
 Method:                 Least Squares   F-statistic:                     214.2
+<<<<<<< HEAD
 Date:                Tue, 28 Apr 2026   Prob (F-statistic):          7.71e-121
 Time:                        12:14:00   Log-Likelihood:                -6786.2
+=======
+Date:                Sun, 17 May 2026   Prob (F-statistic):          7.71e-121
+Time:                        21:14:42   Log-Likelihood:                -6786.2
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 No. Observations:                2049   AIC:                         1.358e+04
 Df Residuals:                    2045   BIC:                         1.360e+04
 Df Model:                           3                                         
@@ -726,7 +764,11 @@ Notes:
 <p>The paper’s Table III regresses class size and test scores on predicted class size from Maimonides’ rule, with controls for percent disadvantaged and enrollment. For fourth-grade reading, the paper reports a negative reduced-form relationship between the rule-based predictor and reading scores.</p>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage">Reduced Form: Reading on Predicted Class Size + Disadvantage</h4>
+<<<<<<< HEAD
 <div id="0564b4e9" class="cell" data-execution_count="7">
+=======
+<div id="43e45264" class="cell" data-execution_count="7">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rf_1 <span class="op">=</span> smf.ols(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach"</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -739,8 +781,13 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.311
 Model:                            OLS   Adj. R-squared:                  0.311
 Method:                 Least Squares   F-statistic:                     326.5
+<<<<<<< HEAD
 Date:                Tue, 28 Apr 2026   Prob (F-statistic):          8.88e-124
 Time:                        12:14:00   Log-Likelihood:                -6783.4
+=======
+Date:                Sun, 17 May 2026   Prob (F-statistic):          8.88e-124
+Time:                        21:14:42   Log-Likelihood:                -6783.4
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2046   BIC:                         1.359e+04
 Df Model:                           2                                         
@@ -765,7 +812,11 @@ Notes:
 </section>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment">Reduced Form: Reading on Predicted Class Size + Disadvantage + Enrollment</h4>
+<<<<<<< HEAD
 <div id="fa914953" class="cell" data-execution_count="8">
+=======
+<div id="b2d39c1d" class="cell" data-execution_count="8">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rf_2 <span class="op">=</span> smf.ols(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach + c_size"</span>,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -778,8 +829,13 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.311
 Model:                            OLS   Adj. R-squared:                  0.310
 Method:                 Least Squares   F-statistic:                     217.6
+<<<<<<< HEAD
 Date:                Tue, 28 Apr 2026   Prob (F-statistic):          1.70e-122
 Time:                        12:14:00   Log-Likelihood:                -6783.4
+=======
+Date:                Sun, 17 May 2026   Prob (F-statistic):          1.70e-122
+Time:                        21:14:42   Log-Likelihood:                -6783.4
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2045   BIC:                         1.360e+04
 Df Model:                           3                                         
@@ -805,7 +861,11 @@ Notes:
 </section>
 <section id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment-quadratic-enrollment" class="level4">
 <h4 class="anchored" data-anchor-id="reduced-form-reading-on-predicted-class-size-disadvantage-enrollment-quadratic-enrollment">Reduced Form: Reading on Predicted Class Size + Disadvantage + Enrollment + Quadratic Enrollment</h4>
+<<<<<<< HEAD
 <div id="8e0d8e31" class="cell" data-execution_count="9">
+=======
+<div id="ae1db1e2" class="cell" data-execution_count="9">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rf_3 <span class="op">=</span> smf.ols(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avgverb ~ func1 + tipuach + c_size + c_size2"</span>,</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df</span>
@@ -818,8 +878,13 @@ Notes:
 Dep. Variable:                avgverb   R-squared:                       0.314
 Model:                            OLS   Adj. R-squared:                  0.312
 Method:                 Least Squares   F-statistic:                     165.3
+<<<<<<< HEAD
 Date:                Tue, 28 Apr 2026   Prob (F-statistic):          9.50e-123
 Time:                        12:14:00   Log-Likelihood:                -6779.9
+=======
+Date:                Sun, 17 May 2026   Prob (F-statistic):          9.50e-123
+Time:                        21:14:42   Log-Likelihood:                -6779.9
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 No. Observations:                2049   AIC:                         1.357e+04
 Df Residuals:                    2044   BIC:                         1.360e+04
 Df Model:                           4                                         
@@ -846,7 +911,11 @@ Notes:
 </section>
 <section id="compare-ols-and-reduced-form" class="level4">
 <h4 class="anchored" data-anchor-id="compare-ols-and-reduced-form">Compare OLS and Reduced Form</h4>
+<<<<<<< HEAD
 <div id="7f707dee" class="cell" data-execution_count="10">
+=======
+<div id="271c4cdd" class="cell" data-execution_count="10">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"OLS: class size + disadvantage"</span>,</span>
@@ -940,7 +1009,11 @@ Notes:
 <p>This is the additional requirement beyond replication.</p>
 <p>The reason Angrist and Lavy can make a causal claim is that Maimonides’ rule induces a known nonlinear and nonmonotonic relationship between enrollment and class size. Enrollment itself may still be related to test scores, but the key idea is that most non-class-size effects of enrollment should vary smoothly, while class size changes sharply at the thresholds. If test scores move in a way that mirrors those same discontinuities, the most plausible explanation is that class size is causing the change. The paper explicitly presents this as an application of Campbell’s regression-discontinuity design.</p>
 <p>To make that intuition visible, I plot average reading scores by enrollment.</p>
+<<<<<<< HEAD
 <div id="97809971" class="cell" data-execution_count="11">
+=======
+<div id="02f518e2" class="cell" data-execution_count="11">
+>>>>>>> 74d1a22 (Add Poisson regression homework blog post)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>score_df <span class="op">=</span> (</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"c_size"</span>, as_index<span class="op">=</span><span class="va">False</span>)[[<span class="st">"avgverb"</span>, <span class="st">"func1"</span>]]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      .mean()</span>
