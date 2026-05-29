@@ -152,6 +152,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./hw3_questions.html">
  <span class="dropdown-text">HW3</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./hw4_questions.html">
+ <span class="dropdown-text">HW4</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -241,7 +245,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="the-law-of-large-numbers">The Law of Large Numbers</h2>
 <p>The Law of Large Numbers states that as the sample size increases, the sample mean converges to the true population mean. In this context, it means that our estimator <span class="math inline">\(\hat\theta = \bar{X}_A - \bar{X}_B\)</span> will become closer to the true difference <span class="math inline">\(\theta\)</span> as we collect more data.</p>
 <p>To demonstrate this, we compute the difference between the CTA A and CTA B outcomes for each observation, and then calculate the cumulative average of these differences as the sample size increases.</p>
-<div id="e2e97602" class="cell" data-execution_count="2">
+<div id="a6db20cd" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -258,7 +262,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="bootstrap-standard-errors">Bootstrap Standard Errors</h2>
 <p>Now that we have an estimate of <span class="math inline">\(\theta\)</span>, the next question is how precise that estimate is. A point estimate tells us the most likely difference in sign-up rates, but it does not tell us how much uncertainty remains.</p>
 <p>One useful way to measure that uncertainty is the bootstrap. The bootstrap is a resampling method: we repeatedly sample with replacement from the observed data, recompute the statistic each time, and then use the variation across those resampled estimates to approximate the standard error.</p>
-<div id="4b6fdd4b" class="cell" data-execution_count="3">
+<div id="0aded0e8" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated difference (theta_hat): 0.0380
 Bootstrap standard error:        0.0175
@@ -274,7 +278,7 @@ Analytical standard error:       0.0178
 <h2 class="anchored" data-anchor-id="the-central-limit-theorem">The Central Limit Theorem</h2>
 <p>The Central Limit Theorem states that regardless of the shape of the underlying population distribution, the sampling distribution of the sample mean becomes approximately Normal as the sample size increases. In this case, it means that the distribution of <span class="math inline">\(\hat\theta = \bar{X}_A - \bar{X}_B\)</span> will become more bell-shaped as the sample size grows.</p>
 <p>To demonstrate this, we simulate the sampling distribution of <span class="math inline">\(\hat\theta\)</span> for different sample sizes: <span class="math inline">\(n \in \{25, 50, 100, 500\}\)</span>.</p>
-<div id="cc311b12" class="cell" data-execution_count="4">
+<div id="cf124b10" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -301,7 +305,7 @@ z = \frac{\hat\theta - 0}{SE(\hat\theta)}
 <p>Second, when we divide a Normally distributed variable by its standard deviation, we obtain a standard Normal distribution <span class="math inline">\(N(0,1)\)</span>. Therefore, under <span class="math inline">\(H_0\)</span>, the test statistic <span class="math inline">\(z\)</span> follows an approximate standard Normal distribution.</p>
 <p>Third, knowing the distribution of <span class="math inline">\(z\)</span> allows us to compute a p-value, which measures how extreme our observed result is under the assumption that the null hypothesis is true.</p>
 <p>Although this procedure is often referred to as a “t-test”, it is more accurate to think of it as a z-test in this setting. The classical t-test applies when the data are Normally distributed and the variance must be estimated, leading to an exact t-distribution. In our case, the data are Bernoulli, not Normal, so there is no exact t-distribution result. Instead, the Central Limit Theorem provides approximate Normality. Since we estimate the standard error from the data, our test is conceptually closer to a z-test. In practice, for large samples, the t-distribution and the standard Normal distribution are very similar, so the difference is not important for our conclusions.</p>
-<div id="1b46e61f" class="cell" data-execution_count="5">
+<div id="de30edac" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>z-statistic: 2.1388
 p-value:     0.0325</code></pre>
@@ -325,7 +329,7 @@ Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i
 \beta_1 = \pi_A - \pi_B = \theta
 \]</span></p>
 <p>and the OLS estimate <span class="math inline">\(\hat\beta_1\)</span> is numerically identical to the difference in sample means <span class="math inline">\(\hat\theta = \bar{X}_A - \bar{X}_B\)</span>.</p>
-<div id="dd546886" class="cell" data-execution_count="6">
+<div id="c1b3fa96" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>beta_1 estimate: 0.0380
 standard error:  0.0178
@@ -343,7 +347,7 @@ theta_hat:       0.0380</code></pre>
 <p>In practice, it can be tempting to check results before an experiment is complete. Suppose we run our A/B test and instead of waiting for all 1,000 observations per group, we check the results every 100 observations. If any of those intermediate tests is significant at the <span class="math inline">\(\alpha = 0.05\)</span> level, we stop early and declare a winner.</p>
 <p>This approach is problematic under classical frequentist statistics. A single hypothesis test at the 5% significance level has a 5% chance of producing a false positive (rejecting <span class="math inline">\(H_0\)</span> when it is actually true). However, when we repeatedly test the data as it accumulates, each check creates another opportunity for a false positive. As a result, the overall probability of making at least one false rejection becomes much higher than 5%.</p>
 <p>To demonstrate this, we simulate a setting where the null hypothesis is true. We set <span class="math inline">\(\pi_A = \pi_B = 0.20\)</span>, meaning there is no real difference between the two CTAs.</p>
-<div id="2ee7b436" class="cell" data-execution_count="7">
+<div id="89ecaad9" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>False positive rate with peeking: 0.1864</code></pre>
 </div>
